@@ -41,11 +41,16 @@ Nine Claude Code skills that turn an Obsidian vault into a working memory for AI
 ```bash
 git clone https://github.com/<you>/obsidian-brain-vault-skills.git
 cd obsidian-brain-vault-skills
-./install.sh            # symlinks skills/* into ~/.claude/skills/
-./install.sh --vault    # also scaffolds ~/Brain/_System from vault/ if it does not exist
+./install.sh                   # Claude Code: symlinks into ~/.claude/skills
+./install.sh --agent codex     # Codex: generated copy in ~/.agents/skills
+./install.sh --agent cursor    # Cursor: generated copy in ~/.cursor/skills
+./install.sh --agent all
+./install.sh --vault           # also scaffold ~/Brain/_System from vault/ if missing
 ```
 
-Set `BRAIN_VAULT=/path/to/vault` before running if your vault is not at `~/Brain`. The skills themselves hardcode `~/Brain`; search and replace that path in `skills/*/SKILL.md` for a different location.
+Claude Code gets symlinks, so an edit under `~/.claude/skills` is an edit in this repo. Codex and Cursor get generated copies with the agent name swapped in and `CLAUDE.md` read as `AGENTS.md`. Vault paths stay identical across agents, so all of them share one `_Claude/sessions/` memory. Re-run the install after editing a skill to refresh the copies.
+
+Set `BRAIN_VAULT=/path/to/vault` before running if your vault is not at `~/Brain`. The skills hardcode `~/Brain`; search and replace that path in `skills/*/SKILL.md` for a different location.
 
 ### Daily job
 
