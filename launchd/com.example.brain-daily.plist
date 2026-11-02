@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.example.brain-daily</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__HOME__/Brain/_System/bin/brain-daily.sh</string>
+    </array>
+
+    <!-- Every day at 16:32 local time.
+         launchd uses local time natively - no UTC conversion needed.
+         If the Mac is asleep at 16:32, launchd fires the job on next wake. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>16</integer>
+        <key>Minute</key><integer>32</integer>
+    </dict>
+
+    <!-- Do not fire on login/load - only on schedule. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>WorkingDirectory</key>
+    <string>__HOME__/Brain</string>
+
+    <key>StandardOutPath</key>
+    <string>__HOME__/Brain/_System/logs/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__HOME__/Brain/_System/logs/launchd.err.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>__HOME__/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>__HOME__</string>
+    </dict>
+
+    <!-- Prevent overlapping runs if one is slow. -->
+    <key>AbandonProcessGroup</key>
+    <false/>
+</dict>
+</plist>

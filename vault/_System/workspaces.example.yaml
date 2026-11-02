@@ -1,0 +1,58 @@
+# Workspace registry — single source of truth for skill routing.
+# Copy to _System/workspaces.yaml and edit.
+#
+# Used by: meetings-sync, brain-triage, brain-drop, brain-file, brain-lint,
+#          brain-record, brain-context, brain-daily.
+#
+# Schema per entry:
+#   folder:    path under the vault root
+#   keywords:  case-insensitive substrings that route content here (titles, filenames, body)
+#   people:    emails or names tied to this workspace (supports `*@domain` wildcards)
+#   status:    active | cold | archived
+#   meetings:  where meeting notes land (default {folder}/meetings/)
+#   aliases:   other names this workspace goes by
+#   parent:    (optional) umbrella workspace this one nests under.
+#              A child beats its parent on routing ties.
+#   structure: (optional) named subsections for subsection-aware filing:
+#                main:     rolling entity page
+#                todos:    cross-session todo list (merge, dedupe, never re-add)
+#                notes:    timestamped session notes
+#                frd:      long-lived findings document
+#                meetings: meeting notes (overrides top-level `meetings:`)
+#   notes:     free-form context for Claude
+#
+# Routing: score = keyword hits + people hits; highest wins. A tie between two
+# unrelated workspaces falls back to _Inbox/. Archived workspaces never receive
+# auto-filed content.
+
+acme:
+  folder: Acme/
+  meetings: Acme/meetings/
+  keywords: [acme, acme corp]
+  people:
+    - "*@acme.com"
+  aliases: [Work]
+  status: active
+  notes: |
+    Day-job umbrella. Add product names, team names, and project codenames to
+    `keywords`; that is what makes routing accurate.
+
+client-a:
+  folder: clients/client-a/
+  parent: acme
+  keywords: [client a, clienta]
+  people:
+    - "*@client-a.example"
+  status: active
+  structure:
+    main: clients/client-a/client-a.md
+    todos: clients/client-a/TODO.md
+    notes: clients/client-a/discovery/notes/
+    frd: clients/client-a/FRD.md
+    meetings: clients/client-a/meetings/
+
+home-renovation:
+  folder: Home/renovation/
+  keywords: [renovation, contractor, kitchen]
+  people: []
+  status: active
