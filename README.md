@@ -2,6 +2,33 @@
 
 Nine Claude Code skills that turn an Obsidian vault into a working memory for AI coding sessions. Sessions write to the vault, the vault feeds the next session, and a daily job keeps it current from your meetings, mail, calendar, and tickets.
 
+## In short
+
+Your AI assistant forgets everything when a chat ends. This kit gives it a notebook that it keeps up to date.
+
+The notebook is a folder of plain notes that you can read in Obsidian. When you work with Claude Code (or Codex or Cursor), it writes down what you did, what you decided, and what is still open. When you start again tomorrow, it reads those notes first. You do not have to explain the project again.
+
+**What you get**
+
+- A short summary of each work session, filed under the right project or client.
+- A to-do list for each project that stays current and has no duplicates.
+- A daily update that can pull in your meetings, email, calendar, and tickets, if you connect them.
+- A weekly check that finds broken links and old to-dos.
+
+**What you need**
+
+- Claude Code, Codex, or Cursor.
+- Obsidian, to read the notes. The notes are normal text files, so any editor also works.
+- Optional: Granola, Gmail, Google Calendar, or Linear connected to Claude, for the daily update.
+
+**Start in three steps**
+
+1. Download this repo and run `./install.sh --vault`.
+2. Open `~/Brain/_System/workspaces.yaml` and list your projects or clients.
+3. At the end of a work session, type `/brain-drop`.
+
+The sections below give the full technical details.
+
 ## What each skill does
 
 | Skill | Run it when | Writes to |
